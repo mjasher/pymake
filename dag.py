@@ -111,7 +111,7 @@ def order_source_files(srcfiles):
                 node.add_dependency(nodedict[mlocation])
 
     #build the ordered dependency list using the topological sort method
-    orderednodes = DirectedAcyclicGraph(nodelist).toposort()
+    orderednodes = DirectedAcyclicGraph(nodelist).toposort() if len(nodelist) > 0 else []
     osrcfiles = []
     for node in orderednodes:
         osrcfiles.append(node.name)
@@ -152,7 +152,7 @@ def order_c_source_files(srcfiles):
 
         # search corresponding .h or .hpp file
         m = re.match('(.*).c(pp|)', srcfile)
-        if m:    
+        if m and os.path.isfile(m.group(1)+'.'+'h'+m.group(2)):    
             f = open(m.group(1)+'.'+'h'+m.group(2), 'r')
             # modulelist = []  #list of modules used by this source file
             # module_dict[srcfile] = srcfile
@@ -186,7 +186,7 @@ def order_c_source_files(srcfiles):
                 node.add_dependency(nodedict[mlocation])
 
     #build the ordered dependency list using the topological sort method
-    orderednodes = DirectedAcyclicGraph(nodelist).toposort()
+    orderednodes = DirectedAcyclicGraph(nodelist).toposort() if len(nodelist) > 0 else []
     osrcfiles = []
     for node in orderednodes:
         osrcfiles.append(node.name)
