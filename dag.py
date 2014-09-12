@@ -136,7 +136,8 @@ def order_c_source_files(srcfiles):
         # search .c or .cpp file
         f = open(srcfile, 'r')
         modulelist = []  #list of modules used by this source file
-        module_dict[os.path.basename(srcfile)] = srcfile # file.c
+        module_dict[os.path.basename(srcfile)] = srcfile # file.c(pp)
+        
         for line in f:
             linelist = line.strip().split()
             if len(linelist) == 0:
@@ -191,7 +192,6 @@ def order_c_source_files(srcfiles):
         osrcfiles.append(node.name)
 
     return osrcfiles
-
 
 
 
