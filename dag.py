@@ -111,7 +111,7 @@ def order_source_files(srcfiles):
                 node.add_dependency(nodedict[mlocation])
 
     #build the ordered dependency list using the topological sort method
-    orderednodes = DirectedAcyclicGraph(nodelist).toposort()
+    orderednodes = DirectedAcyclicGraph(nodelist).toposort() if len(nodelist) > 0 else []
     osrcfiles = []
     for node in orderednodes:
         osrcfiles.append(node.name)
