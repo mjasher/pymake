@@ -1,6 +1,6 @@
 #! /usr/bin/env python
 """
-Make the binary executable for MODFLOW-USG.
+originally: Make the binary executable for MODFLOW-USG.
 """
 __author__ = "Christian D. Langevin"
 __date__ = "March 20, 2014"
@@ -8,18 +8,6 @@ __version__ = "1.0.0"
 __maintainer__ = "Christian D. Langevin"
 __email__ = "langevin@usgs.gov"
 __status__ = "Production"
-
-# mja 
-# remove ieee_arithmetic dependence in gwf2swr7_NWT.f and gsol7.f using http://stackoverflow.com/questions/17389958/is-there-a-standard-way-to-check-for-infinite-and-nan-in-fortran-90-95
-# change T1 in gwf2swr7_NWT.f to real*4 -- TODO this probs isn't wise
-# C  mja      DOUBLEPRECISION, INTENT(INOUT) :: T1
-#         real*4 :: T1
-# change to       DATA FORM/'UNFORMATTED'/ in openspec.inc
-# then run this
-# 
-
-# check call:  ['gfortran', '-O2', '-o', '././MF_NWT', 'gwfsfrmodule_NWT.o', 'mhc7.o', 'gwf2bas7_NWT.o', 'gwf2lpf7.o', 'sip7_NWT.o', 'gwf2chd7.o', 'gwf2riv7_NWT.o', 'gwf2drn7_NWT.o', 'gwf2swt7.o', 'gmg7.o', 'gwf2bcf7.o', 'gsol7.o', 'obs2bas7.o', 'mach_mod.o', 'gwf2ghb7_NWT.o', 'gwf2str7.o', 'gwfuzfmodule_NWT.o', 'gwf2sub7_NWT.o', 'gwf2fhb7.o', 'gwf2evt7.o', 'gwf2hfb7_NWT.o', 'utl7.o', 'de47_NWT.o', 'gwf2ibs7.o', 'NWT1_ilupc_mod.o', 'obs2chd7.o', 'obs2riv7.o', 'gwf2drt7.o', 'parutl7.o', 'gwf2huf7.o', 'gwf2hydmod7.o', 'gwf2res7.o', 'modules.o', 'NWT1_xmdlib.o', 'pcg7_NWT.o', 'gwf2ets7.o', 'gwf2rch7.o', 'NWT1_module.o', 'gwf2upw1.o', 'obs2ghb7.o', 'NWT1_xmd.o', 'obs2drn7.o', 'gwf2wel7_NWT.o', 'gwf2mnw27_NWT.o', 'obs2str7.o', 'gwf2mnw17_NWT.o', 'hufutl7.o', 'gwf2swi27_NWT.o', 'gwf2lak7_NWT.o', 'gwf2swr7_NWT.o', 'NWT1_gmres.o', 'lmt7_NWT.o', 'gwf2uzf1_NWT.o', 'gwf2mnw2i7.o', 'gwf2gag7.o', 'MF_NWT.o', 'gwf2sfr7_NWT.o', 'NWT1_solver.o']
-
 
 import os
 import subprocess
