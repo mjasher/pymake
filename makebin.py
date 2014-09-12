@@ -22,7 +22,6 @@ def compilewin(srcfiles, fc, compileflags, target, makeclean, platform):
     """
     if 'ifort' in fc:
         cpvars = os.environ.get('IFORT_COMPILER13') + 'bin/compilervars.bat'
-        #cpvars = 'C:/Program Files (x86)/Intel/Composer XE 2013/bin/compilervars.bat'
     f = open('compileusg.bat', 'w')
     line = 'call ' + '"' + os.path.normpath(cpvars) + '" ' + platform + '\n'
     f.write(line)
@@ -98,7 +97,7 @@ def main(argv):
     Create the binary executable(s)
     """
     
-    # mja
+    # parse command line aruments
     inputdir = '../src'
     outputfile = 'pymade'
     try:
@@ -116,14 +115,8 @@ def main(argv):
          outputfile = arg
     print 'Input file is "', inputdir
     print 'Output file is "', outputfile
-    # end mja
-
-    print "asdfasdfasdfasdf", os.listdir(os.path.abspath(inputdir))
 
     makeclean = True
-    #targetpth = os.path.join('..', 'bin')
-    targetpth = '.'  #put in current directory
-    # target = os.path.join(targetpth, 'MF_NWT')
     target = outputfile #mja
 
     #remove the target if it already exists
@@ -132,7 +125,7 @@ def main(argv):
     except:
         pass    
     
-    #copy the original source to a src directory
+    #copy the original source to a pymake_tempdir_src directory
     # srcdir_origin = os.path.join('..', 'src')
     srcdir_origin = os.path.abspath(inputdir) # mja
     try:
@@ -142,7 +135,7 @@ def main(argv):
     shutil.copytree(srcdir_origin, 'pymake_tempdir_src')
     srcdir_temp = os.path.join('.', 'pymake_tempdir_src')
         
-    #create a list of all f and f90 source files
+    #create a list of all c(pp), f and f90 source files
     templist = os.listdir(srcdir_temp)
     cfiles = [] # mja
     srcfiles = []
@@ -168,7 +161,6 @@ def main(argv):
     orderedsourcefiles = order_source_files(srcfileswithpath) + order_c_source_files(cfileswithpath) #mja
 
     platform = sys.platform
-    # mja if platform.lower() == 'darwin':
     if platform.lower() == 'darwin' or platform.lower() == 'linux2': #mja
         fc = 'gfortran'
         compileflags = ['-O2']
@@ -177,7 +169,8 @@ def main(argv):
         cc = 'gcc' #mja
         cflags = ['-D_UF', '-O3'] #mja
 
-        #need to change openspec.inc,this is for MODFLOW
+        # NOTE: this is just for MODFLOW
+        #need to change openspec.inc 
         fname = os.path.join(srcdir_temp, 'openspec.inc')
         f = open(fname, 'w')
         f.write(
