@@ -1,4 +1,4 @@
-[A better version of pymake](https://github.com/modflowpy/pymake)
+Click here for [a better version of pymake](https://github.com/modflowpy/pymake)
 ======
 
 pymake
